@@ -81,6 +81,7 @@ const createMovieCard = (movieObj)=>{
 
 const seatAvailability = (movieName)=>{
     userSelectedSeats = []
+    seatSelectionBtn.classList.add('v-none')
     seatGridHolder.innerHTML =''
     seatSelectionHeader.classList.add('v-none')
     seatSeletionContainerEl.appendChild(loaderEl)
