@@ -28,12 +28,13 @@ const renderMovies =()=>{
         .then(listOfMovies =>{
             loaderEl.remove()
 
-            mainContainerEl.appendChild(movieHolder)
+            
 
             listOfMovies.forEach((movie)=>{
                 const movieElment = createMovieCard(movie)
                 movieHolder.append(movieElment);
             })              
+            mainContainerEl.appendChild(movieHolder)
         })
 }
 
@@ -136,16 +137,16 @@ seatSelectionBtn.addEventListener('click',()=>{
 function renderForm() {
     const formElement = `
                         <div id="confirm-purchase">
-                            <h2>confirm your booking for seat No : ${userSelectedSeats.join(", ")}</h2>
+                            <h3>Confirm your booking for seat numbers:${userSelectedSeats.join(", ")}</h3>
                             <form id="customer-detail-form">
                                 <label for="email">Email</label>
                                 <input type="email" id="email" required/>
                                 <br>
-                                <br>
+                                
                                 <label for="phone">phone No</label>
-                                <input type="text" id="phone" required/>
+                                <input type="tel" id="phone" required/>
                                 <br>
-                                <br>
+                                
                                 <button type="submit">purchase</button>
                             </form>
                         </div>
@@ -161,7 +162,7 @@ const renderSuccessEl = ()=> {
 
     const successEl = `
                         <div id="success">
-                            <h2>Booking Details</h2>
+                            <h2>Booking details</h2>
                             <div>seats: ${userSelectedSeats.join(", ")}</div>
                             <div>Phone No: ${phone}</div>
                             <div>Email: ${email}</div>
