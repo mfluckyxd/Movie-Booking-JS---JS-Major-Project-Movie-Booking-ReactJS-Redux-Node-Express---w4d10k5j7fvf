@@ -40,6 +40,7 @@ const renderMovies =()=>{
             movieLinks.forEach((element) => {
                 element.addEventListener('click', (event) => {
                     event.preventDefault();
+                    
             
                     const { d } = event.target.closest('.movie').dataset;
                     seatAvailability(d);
@@ -79,6 +80,9 @@ const createMovieCard = (movieObj)=>{
 
 
 const seatAvailability = (movieName)=>{
+    userSelectedSeats = []
+    seatGridHolder.innerHTML =''
+    seatSelectionHeader.classList.add('v-none')
     seatSeletionContainerEl.appendChild(loaderEl)
 
     fetchMovieAvailability(movieName)
@@ -86,9 +90,10 @@ const seatAvailability = (movieName)=>{
             loaderEl.remove()
             seatSelectionHeader.classList.remove('v-none')
 
-            while(seatGridHolder.lastChild){
-                seatGridHolder.removeChild(seatGridHolder.lastChild)
-            }
+            // seatGridHolder.innerHTML =''
+            // while(seatGridHolder.lastChild){
+            //     seatGridHolder.removeChild(seatGridHolder.lastChild)
+            // }
 
             generateSeatGrid(seats)
             generateSeatGrid(seats, true)
