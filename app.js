@@ -42,7 +42,7 @@ const createMovieCard = (movieObj)=>{
     const {name, imgUrl} = movieObj;
 
     const movieCard = `
-                        <a class="movie-link">
+                        <a class="movie-link" href="/${name}" >
                           <div class="movie" data-d="${name}">
                             <div class="movie-img-wrapper" style="background-image: url('${imgUrl}'); background-size: cover"></div>
                             <h4>${name}</h4>
@@ -53,6 +53,7 @@ const createMovieCard = (movieObj)=>{
     const movieContainer = generateElementAndContent('div')
     movieContainer.innerHTML=movieCard
     movieContainer.addEventListener('click',(event)=>{
+        event.preventDefault();
         const{d} = event.target.parentElement.dataset
         seatAvailability(d)
         
@@ -173,3 +174,15 @@ const renderSuccessEl = ()=> {
 
 
 renderMovies()
+
+// Add an event listener to the parent element of movie links
+document.addEventListener('click', function(event) {
+    if (event.target.classList.contains('movie-link')) {
+      event.preventDefault(); // Prevent the default redirection behavior
+  
+      // Perform any other desired actions here
+      // For example, you can display a message instead of redirecting
+      console.log('Link clicked, but no redirection occurred.');
+    }
+  });
+  
