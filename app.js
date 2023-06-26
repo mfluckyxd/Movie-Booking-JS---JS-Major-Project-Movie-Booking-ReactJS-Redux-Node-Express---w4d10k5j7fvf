@@ -43,7 +43,7 @@ const createMovieCard = (movieObj)=>{
 
     const movieCard = `
                         <a class="movie-link">
-                          <div class="movie" data-id="${name}">
+                          <div class="movie" data-d="${name}">
                             <div class="movie-img-wrapper" style="background-image: url('${imgUrl}'); background-size: cover"></div>
                             <h4>${name}</h4>
                           </div>
@@ -53,8 +53,8 @@ const createMovieCard = (movieObj)=>{
     const movieContainer = generateElementAndContent('div')
     movieContainer.innerHTML=movieCard
     movieContainer.addEventListener('click',(event)=>{
-        const{id} = event.target.parentElement.dataset
-        seatAvailability(id)
+        const{d} = event.target.parentElement.dataset
+        seatAvailability(d)
         
     })
     return movieContainer
