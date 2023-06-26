@@ -28,37 +28,53 @@ const renderMovies =()=>{
         .then(listOfMovies =>{
             loaderEl.remove()
 
-            
-
             listOfMovies.forEach((movie)=>{
                 const movieElment = createMovieCard(movie)
-                movieHolder.append(movieElment);
-            })              
+                movieHolder.appendChild(movieElment)
+            })       
+             
             mainContainerEl.appendChild(movieHolder)
+
+
+            const movieLinks = document.querySelectorAll('.movie-link');
+            movieLinks.forEach((element) => {
+                element.addEventListener('click', (event) => {
+                    event.preventDefault();
+            
+                    const { d } = event.target.closest('.movie').dataset;
+                    seatAvailability(d);
+                  
+                });
+              });
+            
         })
 }
 
 const createMovieCard = (movieObj)=>{
     const {name, imgUrl} = movieObj;
 
-    const movieCard = `
-                        <a class="movie-link" href="/${name}" >
+    const movieCard = generateElementAndContent('a')
+    movieCard.classList.add('movie-link')
+    movieCard.setAttribute('href',`/${name}`)
+
+    const htmlContent = `
+                        
                           <div class="movie" data-d="${name}">
                             <div class="movie-img-wrapper" style="background-image: url('${imgUrl}'); background-size: cover"></div>
                             <h4>${name}</h4>
                           </div>
-                        </a>
+                        
                      `
+    movieCard.innerHTML = htmlContent;
 
-    const movieContainer = generateElementAndContent('div')
-    movieContainer.innerHTML=movieCard
-    movieContainer.addEventListener('click',(event)=>{
-        event.preventDefault();
-        const{d} = event.target.parentElement.dataset
-        seatAvailability(d)
+
+    // movieContainer.addEventListener('click',(event)=>{
+    //     event.preventDefault();
+    //     const{d} = event.target.parentElement.dataset
+    //     seatAvailability(d)
         
-    })
-    return movieContainer
+    // })
+    return movieCard
 }
 
 
@@ -175,14 +191,5 @@ const renderSuccessEl = ()=> {
 
 renderMovies()
 
-// Add an event listener to the parent element of movie links
-document.addEventListener('click', function(event) {
-    if (event.target.classList.contains('movie-link')) {
-      event.preventDefault(); // Prevent the default redirection behavior
-  
-      // Perform any other desired actions here
-      // For example, you can display a message instead of redirecting
-      console.log('Link clicked, but no redirection occurred.');
-    }
-  });
+
   
